@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<style>
+    button {
+        color: rgb(0, 0, 0);
+        background-color: aqua;
+        font-family:'Times New Roman', Times, serif;
+        font-style:italic;
+    }
+</style>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    
+    <!-- Fixed: playerMove should be passed correctly -->
+    <button onclick="playGame('rock');">Rock</button>
+    <button onclick="playGame('paper');">Paper</button>
+    <button onclick="playGame('scissors');">Scissors</button>
+
+    <script>
+        function playGame(playerMove) {
+            // Fixed: function name spelling corrected to pickComputermove()
+            pickComputermove();
+
+            console.log(computerMove);
+            let result = '';  // Fixed: 'result' should be declared with 'let' or 'var'
+
+            // Logic for the game
+            if (playerMove === 'scissors') {
+                if (computerMove === 'rock') {
+                    result = 'you lose';
+                } else if (computerMove === 'paper') {
+                    result = 'you win';
+                } else if (computerMove === 'scissors') {
+                    result = 'tie';
+                }
+            } 
+            else if (playerMove === 'paper') {
+                if (computerMove === 'rock') {
+                    result = 'you win';
+                } else if (computerMove === 'paper') {
+                    result = 'tie';
+                } else if (computerMove === 'scissors') {
+                    result = 'you lose';
+                }
+            } 
+            else if (playerMove === 'rock') {
+                if (computerMove === 'rock') {
+                    result = 'tie';
+                } else if (computerMove === 'paper') {
+                    result = 'you lose';
+                } else if (computerMove === 'scissors') {
+                    result = 'you win';
+                }
+            }
+            
+            // Fixed: moved alert outside 'else if' block to ensure it runs
+            alert('You picked ' + playerMove + ' and computer picked ' + computerMove + '. ' + result);
+        }
+
+        let computerMove = '';  // Fixed: declared 'computerMove' with 'let' to ensure proper scoping
+
+        // Function for computer's move
+        function pickComputermove() {
+            let randomNumber = Math.random();  // Fixed: 'randomNumber' should be declared with 'let'
+        
+            if (randomNumber >= 0 && randomNumber < 1/3) {
+                computerMove = 'rock';
+            } else if (randomNumber >= 1/3 && randomNumber < 2/3) {
+                computerMove = 'paper';
+            } else {
+                computerMove = 'scissors';
+            }
+
+            return computerMove;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<style>
+    button {
+        color: rgb(0, 0, 0);
+        background-color: aqua;
+        font-family:'Times New Roman', Times, serif;
+        font-style:italic;
+    }
+</style>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    
+    <!-- Fixed: playerMove should be passed correctly -->
+    <button onclick="playGame('rock');">Rock</button>
+    <button onclick="playGame('paper');">Paper</button>
+    <button onclick="playGame('scissors');">Scissors</button>
+    <button onclick="score.wins=0; score.losses=0; score.tie=0; ">Reset score</button>
+
+    <script>
+
+        const score = {
+            wins: 0,
+            losses: 0,
+            tie: 0,
+        };
+
+        let computerMove = '';  // Fixed: declared 'computerMove' with 'let' to ensure proper scoping
+
+        function playGame(playerMove) {
+            // Fixed: function name spelling corrected to pickComputermove()
+            pickComputermove();
+
+            console.log(computerMove);
+            let result = '';  // Fixed: 'result' should be declared with 'let' or 'var'
+
+            // Logic for the game
+            if (playerMove === 'scissors') {
+                if (computerMove === 'rock') {
+                    result = 'you lose';
+                } else if (computerMove === 'paper') {
+                    result = 'you win';
+                } else {
+                    result = 'tie';  // Added a default case for tie
+                }
+            } 
+            else if (playerMove === 'paper') {
+                if (computerMove === 'rock') {
+                    result = 'you win';
+                } else if (computerMove === 'paper') {
+                    result = 'tie';
+                } else {
+                    result = 'you lose';
+                }
+            } 
+            else if (playerMove === 'rock') {
+                if (computerMove === 'rock') {
+                    result = 'tie';
+                } else if (computerMove === 'paper') {
+                    result = 'you lose';
+                } else {
+                    result = 'you win';
+                }
+            }
+
+            // Fixed: corrected property names to match score object
+            if(result === 'you win') {
+                score.wins += 1;  // Fixed: changed 'score.win' to 'score.wins'
+            } else if(result === 'you lose') {
+                score.losses += 1;  // Fixed: changed 'score.losses' to 'score.losses'
+            } else if(result === 'tie') {  // Fixed: added 'if' for tie condition
+                score.tie += 1;  // Fixed: changed 'score.tie' to 'score.tie'
+            }
+
+            // Fixed: moved alert outside of the 'if' blocks to ensure it runs every time
+            alert('You picked ' + playerMove + ' and computer picked ' + computerMove + '. ' + 
+                  'Wins: ' + score.wins + ', Losses: ' + score.losses + ', Ties: ' + score.tie);
+        }
+
+        // Function for computer's move
+        function pickComputermove() {
+            let randomNumber = Math.random();  // Fixed: 'randomNumber' should be declared with 'let'
+        
+            if (randomNumber < 1/3) {
+                computerMove = 'rock';
+            } else if (randomNumber < 2/3) {
+                computerMove = 'paper';
+            } else {
+                computerMove = 'scissors';
+            }
+
+            return computerMove;
+        }
+    </script>
+</body>
+</html>
